@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./src/packages/excalidraw/
     permissions:
       contents: read
       packages: write
