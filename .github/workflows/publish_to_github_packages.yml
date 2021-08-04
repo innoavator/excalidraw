@@ -24,7 +24,7 @@ jobs:
           # scope: "@ayaankhan98"
       - run: npm install
         working-directory: ${{env.working-directory}}
-      - run: npm publish
+      - run: npm publish --access public
         working-directory: ${{env.working-directory}}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
