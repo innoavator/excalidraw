@@ -21,8 +21,10 @@ jobs:
           node-version: "12.x"
           registry-url: "https://npm.pkg.github.com"
           # Defaults to the user or organization that owns the workflow file
-          scope: "@ayaankhan98"
-          working-directory: ./src/packages/excalidraw/
-      - run: npm install && npm publish
+          # scope: "@ayaankhan98"
+      - run: npm install
+        working-directory: ${{env.working-directory}}
+      - run: npm publish
+        working-directory: ${{env.working-directory}}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
