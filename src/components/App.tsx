@@ -392,6 +392,22 @@ class App extends React.Component<AppProps, AppState> {
       renderCustomStats,
     } = this.props;
 
+    const renderSaveImageBtn = () => {
+      return (
+        <button
+          className="save-image-btn-meetcollab"
+          onClick={() =>
+            this.props.onSaveImageClick?.(
+              this.scene.getElementsIncludingDeleted(),
+              this.state,
+            )
+          }
+        >
+          Save Image
+        </button>
+      );
+    };
+
     return (
       <div
         className={clsx("excalidraw excalidraw-container", {
@@ -427,6 +443,8 @@ class App extends React.Component<AppProps, AppState> {
               toggleZenMode={this.toggleZenMode}
               langCode={getLanguage().code}
               isCollaborating={this.props.isCollaborating || false}
+              renderSaveImageBtn={renderSaveImageBtn}
+              showSaveImageBtn={this.props.showSaveImageBtn || false}
               renderTopRightUI={renderTopRightUI}
               renderCustomFooter={renderFooter}
               viewModeEnabled={viewModeEnabled}

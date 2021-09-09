@@ -65,6 +65,8 @@ interface LayerUIProps {
   toggleZenMode: () => void;
   langCode: Language["code"];
   isCollaborating: boolean;
+  renderSaveImageBtn?: () => JSX.Element;
+  showSaveImageBtn?: boolean;
   renderTopRightUI?: (isMobile: boolean, appState: AppState) => JSX.Element;
   renderCustomFooter?: (isMobile: boolean, appState: AppState) => JSX.Element;
   viewModeEnabled: boolean;
@@ -373,6 +375,8 @@ const LayerUI = ({
   showThemeBtn,
   toggleZenMode,
   isCollaborating,
+  renderSaveImageBtn,
+  showSaveImageBtn,
   renderTopRightUI,
   renderCustomFooter,
   viewModeEnabled,
@@ -491,6 +495,7 @@ const LayerUI = ({
               />
             )} */}
           </Stack.Row>
+          {showSaveImageBtn && renderSaveImageBtn?.()}
           <BackgroundPickerAndDarkModeToggle
             actionManager={actionManager}
             appState={appState}

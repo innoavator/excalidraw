@@ -525,7 +525,15 @@
     }
   }
 }
-
+.save-image-btn-meetcollab {
+  background-color: #2dce89 !important;
+  color: white;
+  padding: 0.5rem 0 !important;
+}
+.save-image-btn-meetcollab:hover {
+  transition: 2ms;
+  background-color: darken($color: #2dce89, $amount: 15) !important;
+}
 .ErrorSplash.excalidraw {
   min-height: 100vh;
   padding: 20px 0;
