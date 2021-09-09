@@ -491,7 +491,7 @@ const ExcalidrawApp = (props: any) => {
           activeRoomLink={activeRoomLink}
           isCollaborating={isCollaborating}
           onSaveImageClick={props.onSaveImageClick}
-          showSaveImageBtn={props.showSaveImageBtn || true}
+          showSaveImageBtn={props.showSaveImageBtn}
         />
       </CollabContextConsumer>
     </TopErrorBoundary>
