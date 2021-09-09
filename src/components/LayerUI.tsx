@@ -7,10 +7,10 @@ import React, {
   useState,
 } from "react";
 import { ActionManager } from "../actions/manager";
-import { CLASSES } from "../constants";
+// import { CLASSES } from "../constants";
 import { exportCanvas } from "../data";
 import { importLibraryFromJSON, saveLibraryAsJSON } from "../data/json";
-import { isTextElement, showSelectedShapeActions } from "../element";
+import { isTextElement /*, showSelectedShapeActions*/ } from "../element";
 import { NonDeletedExcalidrawElement } from "../element/types";
 import { Language, t } from "../i18n";
 import { useIsMobile } from "../components/App";
@@ -24,8 +24,11 @@ import {
   LibraryItems,
 } from "../types";
 import { muteFSAbortError } from "../utils";
-import { SelectedShapeActions, ShapesSwitcher, ZoomActions } from "./Actions";
-import { BackgroundPickerAndDarkModeToggle } from "./BackgroundPickerAndDarkModeToggle";
+import {
+  /*SelectedShapeActions,*/ ShapesSwitcher,
+  ZoomActions,
+} from "./Actions";
+// import { BackgroundPickerAndDarkModeToggle } from "./BackgroundPickerAndDarkModeToggle";
 /* import CollabButton from "./CollabButton"; */
 import { ErrorDialog } from "./ErrorDialog";
 import { ExportCB, ImageExportDialog } from "./ImageExportDialog";
@@ -36,7 +39,7 @@ import { Island } from "./Island";
 import "./LayerUI.scss";
 import { LibraryUnit } from "./LibraryUnit";
 import { LoadingMessage } from "./LoadingMessage";
-import { LockButton } from "./LockButton";
+// import { LockButton } from "./LockButton";
 import { MobileMenu } from "./MobileMenu";
 import { PasteChartDialog } from "./PasteChartDialog";
 import { Section } from "./Section";
@@ -47,7 +50,7 @@ import { ToolButton } from "./ToolButton";
 /* import { UserList } from "./UserList"; */
 import Library from "../data/library";
 import { JSONExportDialog } from "./JSONExportDialog";
-import { LibraryButton } from "./LibraryButton";
+// import { LibraryButton } from "./LibraryButton";
 import { isImageFileHandle } from "../data/blob";
 
 interface LayerUIProps {
@@ -65,6 +68,9 @@ interface LayerUIProps {
   toggleZenMode: () => void;
   langCode: Language["code"];
   isCollaborating: boolean;
+  renderSaveImageBtn?: () => JSX.Element;
+  renderClearImageBtn?: () => JSX.Element;
+  showSaveAndClearImageBtn?: boolean;
   renderTopRightUI?: (isMobile: boolean, appState: AppState) => JSX.Element;
   renderCustomFooter?: (isMobile: boolean, appState: AppState) => JSX.Element;
   viewModeEnabled: boolean;
@@ -373,6 +379,9 @@ const LayerUI = ({
   showThemeBtn,
   toggleZenMode,
   isCollaborating,
+  renderSaveImageBtn,
+  renderClearImageBtn,
+  showSaveAndClearImageBtn,
   renderTopRightUI,
   renderCustomFooter,
   viewModeEnabled,
@@ -440,11 +449,11 @@ const LayerUI = ({
     );
   };
 
-  const Separator = () => {
+  /*const Separator = () => {
     return <div style={{ width: ".625em" }} />;
   };
 
-  const renderViewModeCanvasActions = () => {
+ const renderViewModeCanvasActions = () => {
     return (
       <Section
         heading="canvasActions"
@@ -452,8 +461,8 @@ const LayerUI = ({
           "transition-left": zenModeEnabled,
         })}
       >
-        {/* the zIndex ensures this menu has higher stacking order,
-         see https://github.com/excalidraw/excalidraw/pull/1445 */}
+        { the zIndex ensures this menu has higher stacking order,
+         see https://github.com/excalidraw/excalidraw/pull/1445 }
         <Island padding={2} style={{ zIndex: 1 }}>
           <Stack.Col gap={4}>
             <Stack.Row gap={1} justifyContent="space-between">
@@ -464,7 +473,7 @@ const LayerUI = ({
         </Island>
       </Section>
     );
-  };
+  };*/
   const renderCanvasActions = () => (
     <Section
       heading="canvasActions"
@@ -476,22 +485,27 @@ const LayerUI = ({
          see https://github.com/excalidraw/excalidraw/pull/1445 */}
       <Island padding={2} style={{ zIndex: 1 }}>
         <Stack.Col gap={4}>
-          <Stack.Row gap={1} justifyContent="space-between">
+          {/* <Stack.Row gap={1} justifyContent="space-between">
             {actionManager.renderAction("clearCanvas")}
             <Separator />
             {actionManager.renderAction("loadScene")}
             {renderJSONExportDialog()}
             {renderImageExportDialog()}
             <Separator />
-            {/* {onCollabButtonClick && (
+            {onCollabButtonClick && (
               <CollabButton
                 isCollaborating={isCollaborating}
                 collaboratorCount={appState.collaborators.size}
                 onClick={onCollabButtonClick}
               />
-            )} */}
+            )}
+          </Stack.Row> */}
+          <Stack.Row gap={2} justifyContent="space-between">
+            {renderSaveImageBtn?.()}
+            {renderClearImageBtn?.()}
           </Stack.Row>
-          <BackgroundPickerAndDarkModeToggle
+
+          {/* <BackgroundPickerAndDarkModeToggle
             actionManager={actionManager}
             appState={appState}
             setAppState={setAppState}
@@ -499,13 +513,13 @@ const LayerUI = ({
           />
           {appState.fileHandle && (
             <>{actionManager.renderAction("saveToActiveFile")}</>
-          )}
+          )} */}
         </Stack.Col>
       </Island>
     </Section>
   );
 
-  const renderSelectedShapeActions = () => (
+  /*const renderSelectedShapeActions = () => (
     <Section
       heading="selectedShapeActions"
       className={clsx("zen-mode-transition", {
@@ -530,7 +544,7 @@ const LayerUI = ({
         />
       </Island>
     </Section>
-  );
+  );*/
 
   const closeLibrary = useCallback(
     (event) => {
@@ -562,10 +576,10 @@ const LayerUI = ({
   ) : null;
 
   const renderFixedSideContainer = () => {
-    const shouldRenderSelectedShapeActions = showSelectedShapeActions(
+    /*const shouldRenderSelectedShapeActions = showSelectedShapeActions(
       appState,
       elements,
-    );
+    );*/
 
     return (
       <FixedSideContainer side="top">
@@ -574,22 +588,23 @@ const LayerUI = ({
             gap={4}
             className={clsx({ "disable-pointerEvents": zenModeEnabled })}
           >
-            {viewModeEnabled
+            {/*{viewModeEnabled
               ? renderViewModeCanvasActions()
-              : renderCanvasActions()}
-            {shouldRenderSelectedShapeActions && renderSelectedShapeActions()}
+            : renderCanvasActions()}*/}
+            {showSaveAndClearImageBtn && renderCanvasActions()}
+            {/* {shouldRenderSelectedShapeActions && renderSelectedShapeActions()}  */}
           </Stack.Col>
           {!viewModeEnabled && (
             <Section heading="shapes">
               {(heading) => (
                 <Stack.Col gap={4} align="start">
                   <Stack.Row gap={1}>
-                    <LockButton
+                    {/* <LockButton
                       zenModeEnabled={zenModeEnabled}
                       checked={appState.elementLocked}
                       onChange={onLockToggle}
                       title={t("toolBar.lock")}
-                    />
+                    /> */}
                     <Island
                       padding={1}
                       className={clsx({ "zen-mode": zenModeEnabled })}
@@ -604,10 +619,10 @@ const LayerUI = ({
                         />
                       </Stack.Row>
                     </Island>
-                    <LibraryButton
+                    {/* <LibraryButton
                       appState={appState}
                       setAppState={setAppState}
-                    />
+                    /> */}
                   </Stack.Row>
                   {libraryMenu}
                 </Stack.Col>

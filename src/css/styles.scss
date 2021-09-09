@@ -525,7 +525,26 @@
     }
   }
 }
-
+.save-image-btn-meetcollab {
+  background-color: #2dce89 !important;
+  color: white;
+  min-width: 90px;
+  padding: 0.5rem !important;
+}
+.save-image-btn-meetcollab:hover {
+  transition: 2ms;
+  background-color: darken($color: #2dce89, $amount: 15) !important;
+}
+.clear-image-btn-meetcollab {
+  background-color: #f5365c !important;
+  color: white;
+  min-width: 90px;
+  padding: 0.5rem !important;
+}
+.clear-image-btn-meetcollab:hover {
+  transition: 2ms;
+  background-color: darken($color: #f5365c, $amount: 15) !important;
+}
 .ErrorSplash.excalidraw {
   min-height: 100vh;
   padding: 20px 0;
