@@ -9,6 +9,7 @@ import {
   actionAddToLibrary,
   actionBringForward,
   actionBringToFront,
+  actionClearCanvas,
   actionCopy,
   actionCopyAsPng,
   actionCopyAsSvg,
@@ -403,11 +404,20 @@ class App extends React.Component<AppProps, AppState> {
             )
           }
         >
-          Save Image
+          Save
         </button>
       );
     };
-
+    const renderClearImageBtn = () => {
+      return (
+        <button
+          className="clear-image-btn-meetcollab"
+          onClick={() => this.actionManager.executeAction(actionClearCanvas)}
+        >
+          Clear
+        </button>
+      );
+    };
     return (
       <div
         className={clsx("excalidraw excalidraw-container", {
@@ -444,7 +454,10 @@ class App extends React.Component<AppProps, AppState> {
               langCode={getLanguage().code}
               isCollaborating={this.props.isCollaborating || false}
               renderSaveImageBtn={renderSaveImageBtn}
-              showSaveImageBtn={this.props.showSaveImageBtn || false}
+              renderClearImageBtn={renderClearImageBtn}
+              showSaveAndClearImageBtn={
+                this.props.showSaveAndClearImageBtn || false
+              }
               renderTopRightUI={renderTopRightUI}
               renderCustomFooter={renderFooter}
               viewModeEnabled={viewModeEnabled}

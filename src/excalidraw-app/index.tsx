@@ -427,7 +427,7 @@ const ExcalidrawWrapper = (props: any) => {
         ref={excalidrawRefCallback}
         onChange={onChange}
         onSaveImageClick={props.onSaveImageClick}
-        showSaveImageBtn={props.showSaveImageBtn}
+        showSaveAndClearImageBtn={props.showSaveAndClearImageBtn}
         initialData={initialStatePromiseRef.current.promise}
         /* onCollabButtonClick={collabAPI?.onCollabButtonClick} */
         isCollaborating={collabAPI?.isCollaborating()}
@@ -491,7 +491,7 @@ const ExcalidrawApp = (props: any) => {
           activeRoomLink={activeRoomLink}
           isCollaborating={isCollaborating}
           onSaveImageClick={props.onSaveImageClick}
-          showSaveImageBtn={props.showSaveImageBtn}
+          showSaveAndClearImageBtn={props.showSaveAndClearImageBtn}
         />
       </CollabContextConsumer>
     </TopErrorBoundary>

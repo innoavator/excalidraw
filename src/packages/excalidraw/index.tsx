@@ -15,7 +15,7 @@ const Excalidraw = (props: ExcalidrawProps) => {
   const {
     onChange,
     onSaveImageClick,
-    showSaveImageBtn,
+    showSaveAndClearImageBtn,
     initialData,
     excalidrawRef,
     /* onCollabButtonClick, */
@@ -76,7 +76,7 @@ const Excalidraw = (props: ExcalidrawProps) => {
       <App
         onChange={onChange}
         onSaveImageClick={onSaveImageClick}
-        showSaveImageBtn={showSaveImageBtn}
+        showSaveAndClearImageBtn={showSaveAndClearImageBtn}
         initialData={initialData}
         excalidrawRef={excalidrawRef}
         /* onCollabButtonClick={onCollabButtonClick} */
